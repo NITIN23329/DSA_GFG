@@ -57,4 +57,13 @@ public class CoinChange2 {
                 else dp[i][sum] = dp[i-1][sum];
         return dp[coins.length][amount];
     }
+    // time complexity : O(n*amount). Space complexity O (amount)
+    public int bottomUpEfficient(int amount,int[] coins){
+        int[] dp = new int[amount+1];
+        dp[0] = 1;  // base case , if amount 0, we have exactly 1 way( take no coins)
+        for(var c : coins)
+            for(int x = c;x<=amount;x++)
+                dp[x] += dp[x - c];
+        return dp[amount];
+    }
 }

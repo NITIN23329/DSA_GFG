@@ -51,21 +51,41 @@ public class CoinChange {
         return dp[i][amount] = y;
     }
     // time complexity O(n*amount), space complexity : O(amount)
-    public int bottomUp(int[] coins, int amount) {
+    /* Recursive relation :
+                    x>0 solve(x) = for all coins c, min[  1 + solve(x - c) ]
+                    x=0 solve(x) = 0
+                    x<0 solve(x) = INFINITE
+            */
+    public static int bottomUp(int[] coins, int amount) {
         long [] dp = new long[amount+1];
+        int[] first = new int[amount+1];    // first[i]  stores the first coin for a amount  = i
         int INT_MAX  = Integer.MAX_VALUE;
         dp[0] = 0;  // base case
         for(int x = 1;x<=amount;x++){
             dp[x] = INT_MAX;    // initially set to not possible
             for(var c : coins)
-                if(x>=c)
-                    dp[x] = Math.min(dp[x], 1 + dp[x-c]);
-            /* Recursive relation :
-                    x>0 solve(x) = for all coins c, min[  1 + solve(x - c) ]
-                    x=0 solve(x) = 0
-                    x<0 solve(x) = INFINITE
-            */
+                if(x>=c && dp[x]>1 + dp[x-c]){
+                    dp[x] = 1 + dp[x-c];
+                    first[x] = c;   // we know that c is a coin for amount = x for sure
+                }
+
+
         }
+        StringBuilder solution = new StringBuilder();
+        int x = amount;
+        if(dp[amount]<INT_MAX)
+            while (x>0){
+                solution.append(first[x]).append(" ");
+                x-=first[x];
+            }
+        else solution.append("no solution");
+        System.out.println("A possible coin combination : "+solution);
         return dp[amount]>=INT_MAX?-1:(int)dp[amount];
+    }
+
+    public static void main(String[] args) {
+        int[] coins = new int[]{3,5,10};
+        int amount = 27;
+        System.out.println(bottomUp(coins,amount));
     }
 }
