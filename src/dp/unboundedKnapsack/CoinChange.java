@@ -50,28 +50,22 @@ public class CoinChange {
         }
         return dp[i][amount] = y;
     }
-    // time and space complexity O(n*amount)
+    // time complexity O(n*amount), space complexity : O(amount)
     public int bottomUp(int[] coins, int amount) {
-        int[][] dp = new int[coins.length+1][amount+1];
-        //initialization
-        // no matter that sum is , if we have no coins , ans is -1
-        for(int sum = 0;sum<=amount;sum++)
-            dp[0][sum] = -1;
-        // no matter what # of coins is , if sum is 0 , ans is 0
-        for(int n=1;n<=coins.length;n++)
-            dp[n][0] = 0;
-        for(int n=1;n<=coins.length;n++)
-            for(int sum=1;sum<=amount;sum++){
-                if(sum-coins[n-1]>=0){
-                    int choice1 = dp[n][sum-coins[n-1]];
-                    int choice2 = dp[n-1][sum];
-                    if(choice1 ==-1 && choice2==-1)dp[n][sum]=-1;
-                    else if(choice1==-1)dp[n][sum] = choice2;
-                    else if(choice2==-1)dp[n][sum] = 1 + choice1;
-                    else dp[n][sum] = Math.min(1+choice1,choice2);
-                }
-                else dp[n][sum] = dp[n-1][sum];
-            }
-        return dp[coins.length][amount];
+        long [] dp = new long[amount+1];
+        int INT_MAX  = Integer.MAX_VALUE;
+        dp[0] = 0;  // base case
+        for(int x = 1;x<=amount;x++){
+            dp[x] = INT_MAX;    // initially set to not possible
+            for(var c : coins)
+                if(x>=c)
+                    dp[x] = Math.min(dp[x], 1 + dp[x-c]);
+            /* Recursive relation :
+                    x>0 solve(x) = for all coins c, min[  1 + solve(x - c) ]
+                    x=0 solve(x) = 0
+                    x<0 solve(x) = INFINITE
+            */
+        }
+        return dp[amount]>=INT_MAX?-1:(int)dp[amount];
     }
 }
