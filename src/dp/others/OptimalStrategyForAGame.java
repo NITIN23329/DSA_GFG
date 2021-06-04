@@ -50,7 +50,7 @@ public class OptimalStrategyForAGame {
                 --> Then we calculate alice + (- bob) and return it.
             --> If it is bob's turn, we return min ( - arr[l] + contribution from alice, - arr[r] +  contribution from alice)
                 --> The recursive function which we called will give smaller diff .
-                --> Then we subtract bob's score from it and add smaller diff and then return it 
+                --> Then we subtract bob's score from it and add smaller diff and then return it
 
      */
     private static long getAliceScore(int[] arr,int n) {
