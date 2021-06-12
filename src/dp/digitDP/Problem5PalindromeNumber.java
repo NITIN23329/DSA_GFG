@@ -8,9 +8,21 @@ import java.util.Arrays;
 
 /**
  *  Approach : use Digit dp, time and space complexity : O( logn * logn * 2 * 2)
- *  --> For a number to be palindrome,
+ *  --> For a number to be palindrome, number[i] = number[n-i-1]
+ *  --> We keep hold of 2 pointers l and r. l is for i, and r if for n-i-1.
+ *  --> But why we need 2 pointers, why not use only onr pointer?
+ *  --> Note that we can not take numbers like " 001232100 " as palindrome cuz prefix 0 will be removed
+ *      and number become "1232100" which is not palindrome .
+ *  --> Hence we can only place 0 at index l and r iff, we have a currently valid running number
+ *  --> Inorder to check whether we have a number started, we can create a boolean variable canPlaceZero
+ *          which is 1 if we can place 0 in l and r otherwise not.
+ *  --> if canPlaceZero == 0 and we want to place digit 0, we can only goto f(l+1,r), we can got f(l+1,r-1)
+ *  --> Well this solution will have a palindromic number which max exceeds r.
+ *  --> Suppose r = 12301, we end up getting a palindromic number '12321' which is > r
+ *      We need to remove it explicitly and there is at max 1 such number like this
+ *
  */
-public class Problem4PalindromeNumber {
+public class Problem5PalindromeNumber {
     static int[][][][] dp = new int[20][20][2][2];
     private static int solve(long a, long b){
         long l = Math.min(a,b);
