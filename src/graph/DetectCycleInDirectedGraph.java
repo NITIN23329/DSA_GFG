@@ -44,12 +44,14 @@ public class DetectCycleInDirectedGraph {
     }
     private static boolean dfs(int curr,ArrayList<ArrayList<Integer>> adj,boolean[] isVisited,Set<Integer> currStack){
         if(currStack.contains(curr))return true;
-        isVisited[curr] = true;
         currStack.add(curr);
         for(int neig : adj.get(curr)){
-            boolean x = dfs(neig,adj,isVisited,currStack);
-            if(x)return true;
+            if(!isVisited[neig]){
+                boolean x = dfs(neig,adj,isVisited,currStack);
+                if(x)return true;
+            }
         }
+        isVisited[curr] = true;
         currStack.remove(curr);
         return false;
     }
