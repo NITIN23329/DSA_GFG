@@ -1,4 +1,4 @@
-package graph;
+package graph.traversal;
 //problem link : https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1/?track=SPC-Graph&batchId=154
 import java.util.ArrayDeque;
 import java.util.ArrayList;

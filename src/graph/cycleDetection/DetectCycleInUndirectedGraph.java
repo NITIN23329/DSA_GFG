@@ -1,4 +1,4 @@
-package graph;
+package graph.cycleDetection;
 //problem link : https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1/?track=SPC-Graph&batchId=154
 import java.util.ArrayList;
 import java.util.Stack;

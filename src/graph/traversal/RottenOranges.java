@@ -1,4 +1,4 @@
-package graph;
+package graph.traversal;
 // problem link : https://practice.geeksforgeeks.org/problems/rotten-oranges2536/1/?track=DSASP-Graph&batchId=154
 import java.util.*;
 

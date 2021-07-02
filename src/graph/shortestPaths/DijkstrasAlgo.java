@@ -1,4 +1,4 @@
-package graph;
+package graph.shortestPaths;
 //problem link : https://www.hackerrank.com/challenges/dijkstrashortreach/problem
 //problem link : https://practice.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1/?track=SPC-Graph&batchId=154
 // dijkstra does not work for negative weights.

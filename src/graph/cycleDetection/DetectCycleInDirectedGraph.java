@@ -1,4 +1,4 @@
-package graph;
+package graph.cycleDetection;
 /**
  * **********************************************************IMPORTANT**********************************
  * problem link : https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1/?track=SPC-Graph&batchId=154

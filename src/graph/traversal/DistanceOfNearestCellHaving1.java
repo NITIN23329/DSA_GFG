@@ -1,4 +1,4 @@
-package graph;
+package graph.traversal;
 //problem link : https://practice.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1/?track=DSASP-Graph&batchId=154#
 import java.util.LinkedList;
 import java.util.Queue;

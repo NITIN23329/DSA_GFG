@@ -1,4 +1,4 @@
-package graph;
+package graph.traversal;
 // problem link : https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1/?track=SPC-Graph&batchId=154
 import java.util.ArrayList;
 import java.util.LinkedList;

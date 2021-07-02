@@ -1,4 +1,4 @@
-package graph;
+package graph.traversal;
 //problem link : https://practice.geeksforgeeks.org/problems/steps-by-knight5927/1/?track=DSASP-Graph&batchId=154
 import java.util.*;
 /*      time complexity o(n^2)  , space complexity O(n^2)

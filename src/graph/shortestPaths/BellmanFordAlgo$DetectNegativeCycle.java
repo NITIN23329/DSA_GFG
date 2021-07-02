@@ -1,4 +1,4 @@
-package graph;
+package graph.shortestPaths;
 // problem link : https://practice.geeksforgeeks.org/problems/negative-weight-cycle/0
 import java.util.ArrayList;
 import java.util.Arrays;

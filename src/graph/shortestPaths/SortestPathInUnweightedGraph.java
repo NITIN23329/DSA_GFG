@@ -1,4 +1,4 @@
-package graph;
+package graph.shortestPaths;
 
 //similar problem : https://practice.geeksforgeeks.org/problems/level-of-nodes-1587115620/1/?track=SPC-Graph&batchId=154
 import java.util.*;

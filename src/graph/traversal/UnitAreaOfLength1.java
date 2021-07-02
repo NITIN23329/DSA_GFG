@@ -1,4 +1,4 @@
-package graph;
+package graph.traversal;
 
 //problem link : https://practice.geeksforgeeks.org/problems/length-of-largest-region-of-1s-1587115620/1/?track=SPC-Graph&batchId=154
 /*  time complexity O(nm) , space complexity (nm) excluding recursive stack;
