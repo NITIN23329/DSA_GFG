@@ -3,70 +3,41 @@ package backtracking;
 import java.util.*;
 
 public class MColoring {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int tc = scan.nextInt();
-
-        while (tc-- > 0) {
-            int V = scan.nextInt();
-            int C = scan.nextInt();
-            int E = scan.nextInt();
-
-            List<Integer>[] G = new ArrayList[V];
-            for (int i = 0; i < V; i++) {
-                G[i] = new ArrayList<>();
-            }
-
-            for (int i = 0; i < E; i++) {
-                int u = scan.nextInt() - 1;
-                int v = scan.nextInt() - 1;
-                G[u].add(v);
-                G[v].add(u);
-            }
-            int[] color = new int[V];
-
-            System.out.println(graphColoring(G, color, 0, C) ? 1 : 0);
+    boolean graphColoring(int n, List<int[]> edges, int m) {
+        adj = new ArrayList[n];
+        for(int i=0;i<n;i++)adj[i] = new ArrayList<>();
+        for(int[] x : edges){
+            if(x[0] == x[1])continue;
+            adj[x[0]].add(x[1]);
+            adj[x[1]].add(x[0]);
         }
+        
+        vis = new int[n];
+        boolean ans = true;
+        for(int i=0;i<n;i++)
+            if(vis[i] == 0)ans &= dfs(i,m,n);
+        return ans;
+        
     }
-    static Set<Integer> c ;
-    public static boolean graphColoring(List<Integer>[] g, int[] color, int j, int m) {
-        c = new HashSet<>();
-        for(int i=1;i<=m;i++)c.add(i);
-        for(int i=0;i<g.length;i++)
-            if(color[i]==0){
-                if(!dfs(g,i,color)){
-                    System.out.println(Arrays.toString(color));
-                    return false;
+    List<Integer> [] adj;
+    int[] vis;
+    private boolean dfs(int x, int m, int n){
+        boolean ans = false;
+        for(int c=1;c<=m;c++){
+            vis[x] = c; // try out all possible colors for current node
+            boolean currAns = true;
+            for(int y : adj[x]){
+                if(vis[y] == 0)currAns &= dfs(y,m,n); // check for next node can we color it properly?, since it is bidirectional, it will if we try to color next node with color of current node, then it will get checked in next else if conidion
+                else if(vis[y] == vis[x]){
+                    currAns = false;
+                    break;
                 }
             }
-        System.out.println(Arrays.toString(color));
-        return true;
-
-    }
-    private static boolean dfs(List<Integer>[] g , int curr,int[] color){
-        Set<Integer> poss = new HashSet<>(c);
-        for(int ele : g[curr])poss.remove(color[ele]);
-        int c = 0;
-        for(int neig:g[curr])if(color[neig]==0)c++;
-        if(c==0){
-            if(poss.isEmpty())return false;
-            for(int ele : poss){
-                color[curr] = ele;
-                return true;
-            }
+            ans |= currAns;
         }
-        for(int ele : poss){
-            color[curr]=ele;
-            for(int neig:g[curr]) {
-                if (color[neig] == 0) {
-                    boolean ans = dfs(g, neig, color);
-                    if (ans) return true;
-                    else break;
-                }
-            }
-        }
-        //color[curr] = 0;        //back track
-        return false;
+        vis[x] = 0; //backtrack
+        return ans;
+        
     }
 }
 /*
