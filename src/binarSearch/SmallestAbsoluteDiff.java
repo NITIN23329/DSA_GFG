@@ -40,8 +40,32 @@ public class SmallestAbsoluteDiff {
         }
         return -1;
     }
-    public static int EfficientApproach(int[] arr,int k){
-        // time complexity O(nlogn)
-        return -1;
+    // O(nlogn)
+    public long EfficinetApproach(int arr[], int n, int k)
+    {
+        Arrays.sort(arr);
+        int l = 0;
+        int r = arr[n-1];
+        int ans = -1;
+        while(l<=r){
+            int mid = l +(r-l)/2;
+            long count = findCount(arr,mid);
+            if(count >= k){
+                ans = mid;
+                r = mid-1;
+            }else l = mid+1;
+        }
+        return ans;
     }
+    private long findCount(int[] arr, int diff){
+        int n =arr.length;
+        int ans = 0;
+        int j = 0;
+        for(int i=0;i<n;i++){
+            while(j<n && arr[j] - arr[i] <= diff)j++;
+            ans += j-i-1;
+        }
+        return ans;
+    }
+    
 }
